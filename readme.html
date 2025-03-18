@@ -1,21 +1,33 @@
-<!doctype html>
-<html lang="en">
+ <!doctype html>
+<html>
 <head>
-    <meta charset="utf-8">
+ <!-- 
+ALL CODE PUBLIC DOMAIN!
 
-    <!--
+CC0!
 
-github.com/lafelabs/picrust/README.md
+-->
 
-    -->
-    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+<!--Stop Google:-->
+<META NAME="robots" CONTENT="noindex,nofollow">
+    
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADw8OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAEAAAAQAAEAERAAABARAQEREQAAEBEBAAEAAAAREREAAQAAABEAEQABAAAAEQARAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA3u8AAN7HAADSgwAA0u8AAMDvAADM7wAAzO8AAP//AAD//wAA//8AAP//AAD//wAA" rel="icon" type="image/x-icon">
 
-    <!--Stop Google:-->
-    <META NAME="robots" CONTENT="noindex,nofollow">
+    
+<!--
+ace.js project home:
+https://ace.c9.io/
 
+list of languages:
+https://cloud9-sdk.readme.io/docs/language-mode
+
+
+-->    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
-
-<!--       un comment to use math
+    <!--       
+    un comment to use math
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
@@ -29,112 +41,178 @@ github.com/lafelabs/picrust/README.md
             });//			MathJax.Hub.Typeset();//tell Mathjax to update the math
         </script>
     -->
-
-    
+<title>README.md EDITOR</title>
 </head>
-<body>    
-<div id = "scrollscroll"></div>
-<a id = "editlink" href= "readmeeditor.html">EDIT</a>
+<body>
 
-<a id = "homelink" href= "index.html">HOME</a>
+<h1>README.md</h1>
+
+<div id = "lightdarkbutton" class = "button">--> DARK MODE <--</div>
+<div id = "maineditor" contenteditable="true" spellcheck="false"></div>
+<div id = "displayscroll"></div>
 
 <script>
 
+editor = ace.edit("maineditor");
+editor.setTheme("ace/theme/github");
+//editor.setTheme("ace/theme/vibrant_ink");
+//editor.getSession().setMode("ace/mode/html");
+editor.getSession().setMode("ace/mode/markdown");
 
-scroll = "";
-rawhtml = "";
+editor.getSession().setUseWrapMode(true);
+editor.$blockScrolling = Infinity;
+
+
+
 var converter = new showdown.Converter();
 // for more on options see here:
 // https://github.com/showdownjs/showdown/wiki/Showdown-Options
 converter.setOption('literalMidWordUnderscores', 'true');
 converter.setOption('tables', 'true')
     
-filename = "README.md";
-loadscroll("README.md");
 
 
-function loadscroll(scrollname){
-    filename = scrollname;
+currentFile = "README.md";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        filedata = this.responseText;
+        rawhtml = converter.makeHtml(filedata);
+        document.getElementById("displayscroll").innerHTML = rawhtml;
+        editor.setValue(filedata);
+    }
+};
+httpc.open("GET", "fileloader.php?filename=" + currentFile, true);
+httpc.send();
 
-    document.getElementById("scrollscroll").innerHTML = "";
-    document.getElementById("scrollscroll").style.display = "block";
-    var httpc666 = new XMLHttpRequest();
-    httpc666.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            scroll = this.responseText;
-            rawhtml = converter.makeHtml(scroll);
-            document.getElementById("scrollscroll").innerHTML = rawhtml;
 
-            //			MathJax.Hub.Typeset();//tell Mathjax to update the math
-    //			MathJax.Hub.Typeset();//tell Mathjax to update the math
-        }
-    };
-    httpc666.open("GET", "fileloader.php?filename=" + scrollname, true);
-    httpc666.send();
-    //MathJax.Hub.Typeset();//tell Mathjax to update the math
+
+document.getElementById("maineditor").onkeyup = function(){
+    data = encodeURIComponent(editor.getSession().getValue());
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename="+currentFile);//send text to filesaver.php
+    var fileType = currentFile.split("/")[0]; 
+    var fileName = currentFile.split("/")[1];
 }
 
+
+lightmode = true;
+document.getElementById("lightdarkbutton").style.color = "black";
+document.getElementById("lightdarkbutton").style.borderColor = "black";
+
+document.getElementById("displayscroll").style.backgroundColor = "white";
+document.getElementById("displayscroll").style.color = "black";        
+document.getElementById("lightdarkbutton").innerHTML = "DARK MODE";
+editor.setTheme("ace/theme/github");
+var links = document.getElementById("displayscroll").getElementsByTagName("a");
+for(var index = 0;index < links.length;index++){
+    links[index].style.color = "blue";
+}
+
+document.getElementById("lightdarkbutton").onclick = function(){
+    lightmode = !lightmode;
+    if(lightmode){
+        document.getElementById("lightdarkbutton").style.color = "black";
+        document.getElementById("lightdarkbutton").style.borderColor = "black";
+        document.getElementById("lightdarkbutton").style.backgroundColor = "white";
+        document.getElementById("displayscroll").style.backgroundColor = "white";
+        document.getElementById("displayscroll").style.color = "black";        
+        document.getElementById("lightdarkbutton").innerHTML = "DARK MODE";
+        editor.setTheme("ace/theme/github");
+        var links = document.getElementById("displayscroll").getElementsByTagName("a");
+        for(var index = 0;index < links.length;index++){
+            links[index].style.color = "blue";
+        }
+    }
+    else{
+        
+        document.getElementById("lightdarkbutton").style.color = "white";
+        document.getElementById("lightdarkbutton").style.borderColor = "white";
+        document.getElementById("lightdarkbutton").style.backgroundColor = "#101010";
+        document.getElementById("displayscroll").style.backgroundColor = "#101010";        
+        document.getElementById("displayscroll").style.color = "white";        
+        document.getElementById("lightdarkbutton").innerHTML = "LIGHT MODE";        
+        editor.setTheme("ace/theme/vibrant_ink");
+
+        var links = document.getElementById("displayscroll").getElementsByTagName("a");
+        for(var index = 0;index < links.length;index++){
+            links[index].style.color = "#ff2cb4";
+        }        
+    }
+}
 
 </script>
 <style>
 body{
     overflow:hidden;
-        background-color:#9f8767;
-    font-family:Comic Sans MS;
+    font-family:Arial;
+    background-color:#808080;
 }
-a{
-    color:blue;
+input{
+    font-family:courier;
+    color:white;
 }
-#scrollscroll{
-    padding-left:1em;
-    padding-right:1em;
-    left:0px;
-    bottom:0px;
-    position:absolute;
-    overflow:scroll;
-    font-size:2em;
-    display:none;
-    z-index:-3;
-}
-pre{
-    overflow:scroll;
-}
-#scrollscroll img{
-    max-width:50%;
-    display:block;
-    margin:auto;
-    background-color:none;
-}
-h1,h2,h3,h4{
+h1{
     text-align:center;
 }
-
-#editlink{
+#maineditor{
+    position:absolute;  
+    left:1em;
+    top:5em;
+    right:50%;
+    bottom:1em;
+    font-size:1em;
+    border:solid;
+}
+#displayscroll{
     position:absolute;
-    right:0px;
-    top:0px;
-    font-size:2em;
+    left:55%;
+    right:1em;
+    bottom:1em;
+    top:5em;
+    border:solid;
+    border-width:3px;
+    overflow:scroll;
+    padding: 1em 1em 1em 1em;
+    background-color:white;
 }
-#homelink{
+#displayscroll img{
+    max-width:70%;
+    display:block;
+    margin:auto;
+}
+pre{
+    background-color:#e0e0e0;
+    padding:1em 1em 1em 1em;
+    font-family:courier;
+}
+.button{
+    cursor:pointer;
+    background-color:white;
+    
+}
+.button:hover{
+    background-color:green;
+}
+.button:active{
+    background-color:yellow;
+}
+#lightdarkbutton{
     position:absolute;
-    right:0px;
-    top:4em;
+    right:10px;
+    top:10px;
+    width:10em;
+    text-align:center;
+    border:solid;
+    border-radius:3px;
     font-size:2em;
+    color:black;
 }
 
-@media only screen and (orientation: landscape) {
-    #scrollscroll{
-        top:0px;
-        right:100px;
-    }
-}
-
-@media only screen and (orientation: portrait) {
-    #scrollscroll{
-        top:100px;
-        right:0px;
-    }
-}
 </style>
+
 </body>
 </html>
