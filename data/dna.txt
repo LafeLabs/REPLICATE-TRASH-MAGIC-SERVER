@@ -1,6 +1,7 @@
 {
     "html": [
         "README.md",
+        "documents.html",
         "down.html",
         "edit.html",
         "editplayer.html",
