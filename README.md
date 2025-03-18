@@ -223,6 +223,9 @@ USE FREE MEDIA TO GROW COMMUNITY!
 ![](freestore/COVER3.PNG)
 ![](freestore/COVER4.PNG)
 ![](freestore/COVER5.PNG)
+![](freestore/MAPLINK.PNG)
+![](freestore/MAP.PNG)
+![](freestore/FREEDOM-PLAZA-QRCODE.PNG)
 
 
 
