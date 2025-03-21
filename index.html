@@ -28,7 +28,7 @@ CAPS LOCK ALWAYS ON!
 </head>
 <style>
     #wall{
-        width:80%;
+        width:80%;  
         display:block;
         margin:auto;
         border:solid;
@@ -44,17 +44,18 @@ CAPS LOCK ALWAYS ON!
 
     <div id = "qrcode"></div>
 
-    <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
+
+    <textarea id = "wall"></textarea>
 
     <H1>TRASH MAGIC</H1>
 
     <P>TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE WORLD WIDE WEB!</P>
 
-    <a href = "https://github.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER">REPLICATE TRASH MAGIC SERVER!</a>
-    <a href = "fork.html">FORK DOWN IN THE TRASH MAGIC TREE!</a>
-    <a href = "edit.html">EDIT THIS PAGE!</a>    
-    <A href = "webeditor.html">ALL THE WEB CODE!</A>
     <A href = "qrcode.html">ONE BIG QR CODE!</A>
+    <a href = "fork.html">FORK DOWN IN THE TRASH MAGIC TREE!</a>
+    <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
+    <a href = "https://github.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER">REPLICATE TRASH MAGIC SERVER!</a>
+    <a href = "edit.html">EDIT THIS PAGE!</a>    
     <A HREF = "qrcode-page.html">A PAGE OF QR CODES!</A>
     <a href = "freestore.html">IMAGE FREESTORE!</a>
     <a href = "player.html">MUSIC PLAYER!</a> 
@@ -62,11 +63,10 @@ CAPS LOCK ALWAYS ON!
     <a href = "squares.html">SQUARES!</a>
     <a href = "geometron.html">GEOMETRON!</a>
     <a href = "web.html">THE WORLD WIDE WEB!</a>
+    <A href = "webeditor.html">ALL THE WEB CODE!</A>
     <a href = "readme.html">README.MD</a>
 
-<H1>WRITE ON THE WALL BELOW!</H1>
 
-    <textarea id = "wall"></textarea>
 
 <script>
 
@@ -76,7 +76,14 @@ for(var index = 0;index < titles.length;index++){
 }
 rainbow(document.getElementsByTagName("A"));
 
-codesquaresize = 170;
+if(innerWidth > innerHeight){
+    codesquaresize = 0.8*innerHeight;
+}
+else{
+    codesquaresize = 0.8*innerWidth;
+    
+}
+
 marginsize = 40;
 fontsize = 12;
 //globalurl = "http://www.trashrobot.org/qrcode.html";
