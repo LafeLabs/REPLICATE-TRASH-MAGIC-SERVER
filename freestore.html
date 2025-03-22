@@ -58,7 +58,7 @@ httpcUpload.send();
 
 function loadimagefeed(){
 
-    for(var index = uploadImages.length - 1;index >= 0;index--) {
+    for(var index = 0;index < uploadImages.length;index++) {
         var newuploadbox = document.createElement("DIV");
         newuploadbox.classList.add("imagebox");
         var newimg = document.createElement("IMG");
@@ -106,6 +106,7 @@ body{
     overflow:hidden;
     font-size:1em;
     background-color:#808080;
+    font-family:Comic Sans MS;
 }
 h1{
     text-align:center;
@@ -116,8 +117,7 @@ h1{
     right:0px;
 }
 #linktable a{
-    background-color:black;
-    color:#ff2cb4;
+    color:blue;
     font-size:2em;
 }
 #imagefeedheader{
