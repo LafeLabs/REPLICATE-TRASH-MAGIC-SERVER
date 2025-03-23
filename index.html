@@ -85,7 +85,6 @@ var httpc2 = new XMLHttpRequest();
     httpc2.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         directories = JSON.parse(this.responseText);
-        
         ontology_array = window.location.href.split("/");
         uplink = "../";
         for(var index = ontology_array.length - 3;index > 2;index--){
@@ -95,7 +94,7 @@ var httpc2 = new XMLHttpRequest();
                 uplink += "../";
                 document.getElementById("BOX-OF-FORKS").appendChild(newa);
         }
-
+        rainbow(document.getElementsByTagName("A"));
         for(var index = 0;index < directories.length;index++) {
             if(directories[index] != "freestore" && directories[index] != "data" && directories[index] != "documents" && directories[index] != "php" && directories[index] != "tracks"){
                 var newa = document.createElement("A");
