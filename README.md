@@ -2,9 +2,9 @@
 
 ### [index.html](index.html)
 
-![](freestore/qrcode.png)
-![](freestore/qrcode-page.png)
-![](freestore/laptop1.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/qrcode.png)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/qrcode-page.png)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/laptop1.jpg)
 
 ## WHAT YOU NEED FOR THIS:
 
@@ -23,14 +23,14 @@ MAKE ABSOLUTELY SURE THAT WHOEVER DONATED THE LAPTOP HAS GOT ALL THEIR DATA!  AL
 
 WE USE BLUE TO INDICATED CONTENT AND RED TO INDICATE PLATFORM! THIS DISTINCTION IS USEFUL ENOUGH TO HAVE THIS BE A STEP ON ITS OWN!
 
-![](freestore/redpen.jpg)
-![](freestore/bluepen.jpg)
-![](freestore/thumbdrive.jpg)
-![](freestore/thumbdrive.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/redpen.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/bluepen.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/thumbdrive.jpg)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/thumbdrive.jpg)
 
 WE USE BOTH COLORS AS A REJECTION OF THE BLUE PILL/RED PILL BINARY PRESENTED IN THE MATRIX!  BOTH PILLS ARE TAKEN AND WE ACCEPT THE DUALITY OF THE UNIVERSE!
 
-![](freestore/redandblue.png)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/redandblue.png)
 
 ## STEP 3: DOWNLOAD IMAGE FOR INSTALLING UBUNTU STUDIO!
 
@@ -90,7 +90,7 @@ MAKE SURE THE NEW TRASH MAGIC MACHINE IS ON THE INTERNET!
 
 OPEN A [TERMINAL](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview) BY CLICKING ON THE ACTIVITIES ITEM ON THE UPPER LEFT OF THE SCREEN AND THEN TYPING "TERMINAL" AND IT SHOULD POP UP AND YOU CAN CLICK IT!
 
-![](freestore/TERMINAL.png)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/TERMINAL.png)
 
 IN THE TERMINAL, COPY AND PASTE EACH OF THE FOLLOWING LINES ONE BY ONE:
 
@@ -206,9 +206,9 @@ USE COMMUNITY TO GROW FREE MEDIA!
 
 USE FREE MEDIA TO GROW COMMUNITY!
 
-![](freestore/QRCODE-FACTORY-GLUE.PNG)
-![](freestore/PENTAGRAM-SIGN.PNG)
-![](freestore/MEDIUM-IS-THE-MESSAGE.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/QRCODE-FACTORY-GLUE.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/PENTAGRAM-SIGN.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MEDIUM-IS-THE-MESSAGE.PNG)
 
 ## THE LAWS OF TRASH:
 
@@ -217,15 +217,15 @@ USE FREE MEDIA TO GROW COMMUNITY!
 
 ## CONTENT SCREENSHOTS
 
-![](freestore/ALBUMCOVER1.PNG)
-![](freestore/EBOOKS.PNG)
-![](freestore/COVER2.PNG)
-![](freestore/COVER3.PNG)
-![](freestore/COVER4.PNG)
-![](freestore/COVER5.PNG)
-![](freestore/MAPLINK.PNG)
-![](freestore/MAP.PNG)
-![](freestore/FREEDOM-PLAZA-QRCODE.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/ALBUMCOVER1.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/EBOOKS.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER2.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER3.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER4.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/COVER5.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MAPLINK.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/MAP.PNG)
+![](https://raw.githubusercontent.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/refs/heads/main/freestore/FREEDOM-PLAZA-QRCODE.PNG)
 
 
 

@@ -1,5 +1,9 @@
 <p style = "font-size:5em">
-    <a href = "index.html">home</a>
+    <a href = "freestore.html">FREESTORE</a>
+</p>
+
+<p style = "font-size:5em">
+    <a href = "index.html">HOME</a>
 </p>
 
 <?php
