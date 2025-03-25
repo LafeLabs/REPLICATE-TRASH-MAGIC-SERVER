@@ -21,6 +21,8 @@ CAPS LOCK ALWAYS ON!
 
 
    <script src = "trashmagic.js"></script>
+      <link rel="stylesheet" href="trashmagic.css">
+       <script type="module" src="track-list.js"></script>
 
    <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
@@ -37,60 +39,76 @@ CAPS LOCK ALWAYS ON!
         padding:0.5em 0.5em 0.5em 0.5em;
         border-radius:0.5em;
     }
-    A{
-        COLOR:#ff2cb4;
-        DISPLAY:BLOCK;
-        FONT-SIZE:2EM;
+    li{
+        color:#ff2cb4;
+    }
 
-    }
-    body{
-        padding: 1em 1em 1em 1em;
-    }
-body{
-    overflow:scroll;
-    background-color:#404040;
-    FONT-FAMILY:COMIC SANS MS;
-}
-pre{
-    font-family:courier;
-}
-h1{
-    text-align:center;
-    font-size:4em;
-    FONT-FAMILY:COMIC SANS MS;
-}
-img{
-    display:block;
-    max-width:80%;
-    margin:auto;
-    margin-top:2em;
-    margin-bottom:2em;
-    background-color:#B0916E;
-}
-    
-    
 </style>
 <body>    
-    <H1>FREE FILE LIBRARY!</H1>
-    
-    <DIV ID = "DOCUMENTS"></DIV>
+    <H1>ALBUM TITLE!</H1>
+
+    <DIV ID = "FREESTORE"></DIV>
+    <div id = "tracklist"></div>
     <div id = "qrcode"></div>
     <textarea id = "wall"></textarea>
-    <DIV ID = "FREESTORE"></DIV>
-
-<DIV ID = "LINKS">
-    <A href = "qrcode.html">ONE BIG QR CODE!</A>
     <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
-    <A HREF ="edit.html">CODE EDITOR</A>
-</DIV>
+    <a href = "edit.html">EDIT THIS PAGE!</a>
+    <DIV ID = "DOCUMENTS"></DIV>
 
 <script>
+
+
+
+tracks = [];
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        tracks = JSON.parse(this.responseText);
+        listhtml = "<track-list>\n";
+        listhtml += "  <ol slot = \"tracks\">\n";
+        for(var index = 0;index < tracks.length;index++){
+            listhtml += "    <li>\n";
+            listhtml += "      <strong>" + tracks[index] + "</strong>\n";
+            listhtml += "      <audio controls src = \"tracks/" + tracks[index] + "\"></audio>\n";
+            listhtml += "    </li>\n";
+        }
+        listhtml += "  </ol>\n";
+        listhtml += "</track-list>";
+        document.getElementById("tracklist").innerHTML = listhtml;
+    }
+};
+
+httpc.open("GET", "dir.php?filename=tracks", true);
+httpc.send();
 
 titles = document.getElementsByTagName("H1");
 for(var index = 0;index < titles.length;index++){
     rainbowstring(titles[index]);    
 }
+rainbow(document.getElementsByTagName("A"));
 
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+        for(var index = 0;index < directories.length;index++) {
+            if(directories[index] != "freestore" && directories[index] != "data" && directories[index] != "documents" && directories[index] != "php" && directories[index] != "tracks"){
+                var newa = document.createElement("A");
+                newa.innerHTML = directories[index] + "/";
+                newa.href = directories[index] + "/";
+                document.getElementById("BOX-OF-FORKS").appendChild(newa);
+                rainbow(document.getElementsByTagName("A"));
+
+            }
+        }
+    }
+};
+
+httpc2.open("GET", "dir.php?type=dir", true);
+httpc2.send();
+
+documents = [];
 
 var httpcUploadDOCS = new XMLHttpRequest();
 httpcUploadDOCS.onreadystatechange = function() {
@@ -106,11 +124,40 @@ function loaddocumentfeed(){
     for(var index = documents.length - 1;index >= 0;index--) {
         var newlink = document.createElement("a");
         newlink.href = "documents/" + documents[index];
-        newlink.innerHTML =  documents[index];
+        newlink.innerHTML = "documents/" + documents[index];
         document.getElementById("DOCUMENTS").appendChild(newlink);
+        rainbow(document.getElementsByTagName("A"));
+
     }    
 }
 
+uploadImages = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        uploadImages = JSON.parse(this.responseText);
+        loadimagefeed();
+    }
+};
+httpcUpload.open("GET", "dir.php?filename=freestore", true);
+httpcUpload.send();
+
+function loadimagefeed(){
+
+    for(var index = 0;index < uploadImages.length;index++) {
+        var newuploadbox = document.createElement("DIV");
+        newuploadbox.classList.add("imagebox");
+        var newimg = document.createElement("IMG");
+        newimg.src = "freestore/" + uploadImages[index];
+        newimg.classList.add("uploadimage");
+        
+        newuploadbox.appendChild(newimg);
+        document.getElementById("FREESTORE").appendChild(newuploadbox);
+
+
+    }    
+}
 
 if(innerWidth > innerHeight){
     codesquaresize = 0.8*innerHeight;
