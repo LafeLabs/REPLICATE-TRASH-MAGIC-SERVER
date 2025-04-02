@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC NETWORK</title>    
+
+
+   <script src = "trashmagic.js"></script>
+   <link rel="stylesheet" href="trashmagic.css">
+   
+   
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+    #wall{
+        width:80%;  
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+</style>
+<body>    
+    <A href = "webeditor.html">ALL THE WEB CODE!</A>
+    <a href = "edit.html">EDIT THIS PAGE!</a>    
+
+    <div id = "qrcode"></div>
+    <A href = "qrcode.html">ONE BIG QR CODE!</A>
+    <textarea id = "wall"></textarea>
+
+    <H1>TRASH MAGIC</H1>
+
+    <P>TRASH MAGIC IS SELF-REPLICATING MEDIA ON THE WORLD WIDE WEB!</P>
+    <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
+    <a href = "fork.html">FORK DOWN IN THE TRASH MAGIC TREE!</a>
+    <DIV ID = "BOX-OF-FORKS"></DIV>
+    <a href = "freestore.html">IMAGE FREESTORE!</a>
+    <DIV ID = "FREESTORE"></DIV>
+    <a href = "https://github.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER">REPLICATE TRASH MAGIC SERVER!</a>
+    <a href = "https://github.com/LAfeLabs/hypercube/">REPLICATE THE GEOMETRON HYPERCUBE!</a>
+    <A HREF = "tarot.html">TRASH MAGIC QUANTUM TAROT!</A>
+    <a href = "edit.html">EDIT THIS PAGE!</a>    
+    <A HREF = "qrcode-page.html">A PAGE OF QR CODES!</A>
+    <a href = "squares.html">SQUARES!</a>
+    <a href = "geometron.html">GEOMETRON!</a>
+    <a href = "web.html">THE WORLD WIDE WEB!</a>
+    <A href = "webeditor.html">ALL THE WEB CODE!</A>
+    <a href = "readme.html">README.MD</a>
+    <a href = "player.html">MUSIC PLAYER!</a> 
+    <a href = "documents.html">DOCUMENT SHARE!</a>
+    <DIV ID = "DOCUMENTS"></DIV>
+    <A HREF = "trashmagic.js">TRASHMAGIC.JS</A>
+
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+        ontology_array = window.location.href.split("/");
+        uplink = "../";
+        for(var index = ontology_array.length - 3;index > 2;index--){
+                var newa = document.createElement("A");
+                newa.innerHTML = ontology_array[index] + "/";
+                newa.href = uplink;
+                uplink += "../";
+                document.getElementById("BOX-OF-FORKS").appendChild(newa);
+        }
+        rainbow(document.getElementsByTagName("A"));
+        for(var index = 0;index < directories.length;index++) {
+            if(directories[index] != "freestore" && directories[index] != "data" && directories[index] != "documents" && directories[index] != "php" && directories[index] != "tracks"){
+                var newa = document.createElement("A");
+                newa.innerHTML = directories[index] + "/";
+                newa.href = directories[index] + "/";
+                document.getElementById("BOX-OF-FORKS").appendChild(newa);
+                rainbow(document.getElementsByTagName("A"));
+
+            }
+        }
+    }
+};
+
+httpc2.open("GET", "dir.php?type=dir", true);
+httpc2.send();
+
+documents = [];
+
+var httpcUploadDOCS = new XMLHttpRequest();
+httpcUploadDOCS.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        documents = JSON.parse(this.responseText);
+        loaddocumentfeed();
+    }
+};
+httpcUploadDOCS.open("GET", "dir.php?filename=documents", true);
+httpcUploadDOCS.send();
+
+function loaddocumentfeed(){
+    for(var index = documents.length - 1;index >= 0;index--) {
+        var newlink = document.createElement("a");
+        newlink.href = "documents/" + documents[index];
+        newlink.innerHTML = "documents/" + documents[index];
+        document.getElementById("DOCUMENTS").appendChild(newlink);
+        rainbow(document.getElementsByTagName("A"));
+
+    }    
+}
+
+uploadImages = [];
+
+var httpcUpload = new XMLHttpRequest();
+httpcUpload.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        uploadImages = JSON.parse(this.responseText);
+        loadimagefeed();
+    }
+};
+httpcUpload.open("GET", "dir.php?filename=freestore", true);
+httpcUpload.send();
+
+function loadimagefeed(){
+
+    for(var index = 0;index < uploadImages.length;index++) {
+        var newuploadbox = document.createElement("DIV");
+        newuploadbox.classList.add("imagebox");
+        var newimg = document.createElement("IMG");
+        newimg.src = "freestore/" + uploadImages[index];
+        newimg.classList.add("uploadimage");
+        
+        newuploadbox.appendChild(newimg);
+        document.getElementById("FREESTORE").appendChild(newuploadbox);
+
+
+    }    
+}
+
+if(innerWidth > innerHeight){
+    codesquaresize = 0.8*innerHeight;
+}
+else{
+    codesquaresize = 0.8*innerWidth;
+    
+}
+
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+currentfile = "wall.txt";
+
+motd = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        motd = this.responseText;
+        document.getElementById("wall").value = motd;  
+    }
+};
+httpc.open("GET", "fileloader.php?filename=" + currentfile, true);
+httpc.send();
+
+document.getElementById("wall").onkeyup = function() {
+    scroll = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=" + currentfile);//send text to filesaver.php
+}
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

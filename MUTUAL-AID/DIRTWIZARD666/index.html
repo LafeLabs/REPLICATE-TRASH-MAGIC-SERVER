@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wCuJboADQD/ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzMzMzMzAAADMzMzMzMAAAMzMzd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAREREAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC NETWORK</title>    
+
+
+   <script src = "trashmagic.js"></script>
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+body{
+    overflow:hidden;
+    background-color:#404040;
+    FONT-FAMILY:COMIC SANS MS;
+}
+#TITLE{
+    width:100%;
+    text-align:center;
+}
+#qrcode{
+    position:absolute;
+    z-index:-1;
+    left:5px;
+    top:5px;
+}
+.BOX{
+    display:block;
+    position:absolute;
+    z-index:1;
+    FONT-FAMILY:COMIC SANS MS;
+    BACKGROUND-COLOR:#9f8767;
+    font-size:2em;
+    bottom:100px;
+    top:100px;
+    border-radius:1em;
+}
+#INBOX{
+    left:5px;
+}
+#INBOXH{
+    position:absolute;
+    z-index:-1;
+    LEFT:50PX;
+    bottom:5px;
+}
+#OUTBOXH{
+    POSITION:ABSOLUTE;  
+    RIGHT:50PX;
+    BOTTOM:5PX;
+}
+
+#OUTBOX{
+    right:5px;
+}
+#FRIENDS{
+    position:absolute;
+    z-index:1;
+    background-color:#252525;
+    top:100px;
+    bottom:100px;
+    border:solid;
+    border-radius:1em;
+    overflow:scroll;
+}
+#FRIENDS a{
+    text-align:center;
+    font-size:1.5em;
+    width:80%;
+    margin:auto;
+    display:block;
+    border:solid;
+    border-radius:0.5em;
+    border-width:0.5em;
+    color:black;
+    margin-top:1em;
+    margin-bottom:0.5em;
+    overflow-x:scroll;
+}
+#FRIENDSH{
+    width:100%;
+    text-align:center;
+    position:absolute;
+    bottom:0px;
+}
+</style>
+<body>    
+<div id = "qrcode"></div>
+<H1 ID = "TITLE">DIRT WIZARD</H1>
+<DIV ID = "FRIENDS">
+    <a href = "fork.html">FORK</a>
+</DIV>
+<h1 ID = "INBOXH">INBOX</h1>
+    <TEXTAREA class ="BOX" ID = "INBOX"></TEXTAREA>
+<h1 ID = "OUTBOXH">OUTBOX</h1>
+    <TEXTAREA class = "BOX" ID = "OUTBOX"></TEXTAREA>
+
+<h1 ID = "FRIENDSH">FRIENDS</h1>
+<script>
+
+document.getElementById("TITLE").innerHTML = window.location.href.split("/")[window.location.href.split("/").length-2];
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+rainbow(document.getElementsByTagName("A"));
+
+document.getElementById("INBOX").style.width = (0.32*innerWidth-10).toString() + "px";
+document.getElementById("OUTBOX").style.width = (0.32*innerWidth-10).toString() + "px";
+
+document.getElementById("FRIENDS").style.left = (0.32*innerWidth+10).toString() + "px";
+document.getElementById("FRIENDS").style.right = (0.32*innerWidth+10).toString() + "px";
+
+directories = [];
+var httpc2 = new XMLHttpRequest();
+    httpc2.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        directories = JSON.parse(this.responseText);
+        ontology_array = window.location.href.split("/");
+        uplink = "../";
+        for(var index = ontology_array.length - 3;index > 2;index--){
+                var newa = document.createElement("A");
+                newa.innerHTML = ontology_array[index] + "/";
+                newa.href = uplink;
+                uplink += "../";
+                document.getElementById("FRIENDS").appendChild(newa);
+        }
+        rainbow(document.getElementsByTagName("A"));
+        for(var index = 0;index < directories.length;index++) {
+            if(directories[index] != "freestore" && directories[index] != "data" && directories[index] != "documents" && directories[index] != "php" && directories[index] != "tracks" && directories[index].includes(".html") == false && directories[index].includes(".js") == false && directories[index].includes(".css") == false && directories[index].includes(".php") == false){
+                var newa = document.createElement("A");
+                newa.innerHTML = directories[index] + "/";
+                newa.href = directories[index] + "/";
+                document.getElementById("FRIENDS").appendChild(newa);
+                rainbow(document.getElementsByTagName("A"));
+
+            }
+        }
+    }
+};
+
+httpc2.open("GET", "friendlist.php", true);
+httpc2.send();
+
+
+codesquaresize = 80;
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+inbox = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        inbox = this.responseText;
+        document.getElementById("INBOX").value = inbox;  
+    }
+};
+httpc.open("GET", "fileloader.php?filename=inbox.txt", true);
+httpc.send();
+
+document.getElementById("INBOX").onkeyup = function() {
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=inbox.txt");//send text to filesaver.php
+}
+
+outbox = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        outbox = this.responseText;
+        document.getElementById("OUTBOX").value = outbox;  
+    }
+};
+httpc.open("GET", "fileloader.php?filename=outbox.txt", true);
+httpc.send();
+
+document.getElementById("OUTBOX").onkeyup = function() {
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=outbox.txt");//send text to filesaver.php
+}
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

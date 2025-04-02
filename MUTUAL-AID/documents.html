@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <!--
+
+TRASH MAGIC!
+
+PUBLIC DOMAIN NO COPYRIGHT!
+
+SELF-REPLICATING HTML!
+
+CAPS LOCK ALWAYS ON!
+
+   -->
+   <!--Stop Google:-->
+   <META NAME="robots" CONTENT="noindex,nofollow">
+<link href="data:image/x-icon;base6r4,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAP//AP///wANAP8A5Dz6ABueRwAAt/8A6BonABo86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREREREREREREREAAAEREREREQCIgREREd3dwAAB3d3d3d3d3d3d3d3d3d3d3d3d3VVVVVVVQAFVVAAVVVQIiBRAiIBEQIAIBECAAERAgAgFgIABmYCIiBmAiIGZgIiIGYCIgZmYCIAaIAAMzMzAAiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon">
+
+   <title>TRASH MAGIC NETWORK</title>    
+
+
+   <script src = "trashmagic.js"></script>
+
+   <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<style>
+    #wall{
+        width:80%;  
+        display:block;
+        margin:auto;
+        border:solid;
+        FONT-FAMILY:COMIC SANS MS;
+        BACKGROUND-COLOR:#9f8767;
+        font-size:2em;
+        height:20em;
+        padding:0.5em 0.5em 0.5em 0.5em;
+        border-radius:0.5em;
+    }
+    A{
+        COLOR:#ff2cb4;
+        DISPLAY:BLOCK;
+        FONT-SIZE:2EM;
+
+    }
+    body{
+        padding: 1em 1em 1em 1em;
+    }
+body{
+    overflow:scroll;
+    background-color:#404040;
+    FONT-FAMILY:COMIC SANS MS;
+}
+pre{
+    font-family:courier;
+}
+h1{
+    text-align:center;
+    font-size:4em;
+    FONT-FAMILY:COMIC SANS MS;
+}
+img{
+    display:block;
+    max-width:80%;
+    margin:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+    background-color:#B0916E;
+}
+    
+    
+</style>
+<body>    
+    <H1>FREE FILE LIBRARY!</H1>
+    
+    <DIV ID = "DOCUMENTS"></DIV>
+    <div id = "qrcode"></div>
+    <textarea id = "wall"></textarea>
+    <DIV ID = "FREESTORE"></DIV>
+
+<DIV ID = "LINKS">
+    <A href = "qrcode.html">ONE BIG QR CODE!</A>
+    <a href = "../">UP TO NEXT HIGHER LEVEL IN TRASH MAGIC TREE!</a> 
+    <A HREF ="edit.html">CODE EDITOR</A>
+</DIV>
+
+<script>
+
+titles = document.getElementsByTagName("H1");
+for(var index = 0;index < titles.length;index++){
+    rainbowstring(titles[index]);    
+}
+
+
+var httpcUploadDOCS = new XMLHttpRequest();
+httpcUploadDOCS.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        documents = JSON.parse(this.responseText);
+        loaddocumentfeed();
+    }
+};
+httpcUploadDOCS.open("GET", "dir.php?filename=documents", true);
+httpcUploadDOCS.send();
+
+function loaddocumentfeed(){
+    for(var index = documents.length - 1;index >= 0;index--) {
+        var newlink = document.createElement("a");
+        newlink.href = "documents/" + documents[index];
+        newlink.innerHTML =  documents[index];
+        document.getElementById("DOCUMENTS").appendChild(newlink);
+    }    
+}
+
+
+if(innerWidth > innerHeight){
+    codesquaresize = 0.8*innerHeight;
+}
+else{
+    codesquaresize = 0.8*innerWidth;
+    
+}
+
+marginsize = 40;
+fontsize = 12;
+//globalurl = "http://www.trashrobot.org/qrcode.html";
+globalurl = window.location.href;
+qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: globalurl,
+	width: codesquaresize,
+	height: codesquaresize,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+
+currentfile = "wall.txt";
+
+motd = "";
+var httpc = new XMLHttpRequest();
+httpc.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        motd = this.responseText;
+        document.getElementById("wall").value = motd;  
+    }
+};
+httpc.open("GET", "fileloader.php?filename=" + currentfile, true);
+httpc.send();
+
+document.getElementById("wall").onkeyup = function() {
+    scroll = this.value;
+    data = encodeURIComponent(this.value);
+    var httpc = new XMLHttpRequest();
+    var url = "filesaver.php";        
+    httpc.open("POST", url, true);
+    httpc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    httpc.send("data="+data+"&filename=" + currentfile);//send text to filesaver.php
+}
+
+
+</script>
+</body>
+</html>
+
+
+    
+    

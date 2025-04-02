@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaussian Random Numbers in p5.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #info {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="info">
+            <p>Generating Gaussian (Normal) Distribution</p>
+            <p>Click to generate a new set of numbers.</p>
+        </div>
+        <div id="defaultCanvas0"></div>
+    </div>
+
+    <script>
+        let numbers = [];
+        let mean;
+        let stdDev;
+
+        function setup() {
+            let canvas = createCanvas(400, 300);
+            canvas.mousePressed(generateAndDisplay); // Regenerate on click
+            generateAndDisplay(); // Initial generation and display
+        }
+
+        function generateGaussianNumbers(count, mean, stdDev) {
+            const result = [];
+            for (let i = 0; i < count; i++) {
+                // Box-Muller Transform
+                let u1 = Math.random();
+                let u2 = Math.random();
+                let z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                let n = z0 * stdDev + mean;
+                result.push(n);
+            }
+            return result;
+        }
+
+        function calculateMean(arr) {
+            if (arr.length === 0) return 0;
+            const sum = arr.reduce((a, b) => a + b, 0);
+            return sum / arr.length;
+        }
+
+        function calculateStdDev(arr, mean) {
+          if (arr.length === 0) return 0;
+          const sumOfSquares = arr.reduce((acc, val) => acc + (val - mean) * (val - mean), 0);
+          return Math.sqrt(sumOfSquares / (arr.length - 1)); // Use (n-1) for sample std dev
+        }
+
+        function generateAndDisplay() {
+            numbers = generateGaussianNumbers(500, width / 2, 80); // Generate 500 numbers
+            mean = calculateMean(numbers);
+            stdDev = calculateStdDev(numbers, mean);
+            redraw(); // Force a redraw to update display
+        }
+
+        function draw() {
+            background(240); // Light gray background
+
+            // Display the histogram
+            displayHistogram(numbers, 20); // 20 bins
+            displayGaussianCurve(mean, stdDev);
+            displayStats();
+        }
+
+        function displayHistogram(data, numBins) {
+            const binWidth = (width) / numBins;
+            const bins = new Array(numBins).fill(0);
+
+            // Calculate bin counts
+            for (const value of data) {
+                const binIndex = Math.floor(value / binWidth);
+                if (binIndex >= 0 && binIndex < numBins) {
+                    bins[binIndex]++;
+                }
+            }
+
+            // Find the maximum bin height for scaling
+            const maxBinHeight = Math.max(...bins);
+            const scale = height / maxBinHeight;
+
+            // Draw the histogram bars
+            for (let i = 0; i < numBins; i++) {
+                const binHeight = bins[i] * scale;
+                const x = i * binWidth;
+                const y = height - binHeight;
+                fill(0, 0, 200, 150); // Semi-transparent blue
+                rect(x, y, binWidth, binHeight);
+            }
+        }
+
+        function displayGaussianCurve(mean, stdDev) {
+            noFill();
+            stroke(255, 0, 0); // Red line
+            strokeWeight(2);
+            beginShape();
+            for (let x = 0; x < width; x++) {
+                const y = height - gaussian(x, mean, stdDev) * 100; // Scale it to fit the graph
+                vertex(x, y);
+            }
+            endShape();
+        }
+
+        function gaussian(x, mean, stdDev) {
+            const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));
+            return (1 / (stdDev * Math.sqrt(2 * Math.PI))) * Math.exp(exponent);
+        }
+
+        function displayStats() {
+            fill(0);
+            textSize(16);
+            textAlign(LEFT, BOTTOM);
+            text(`Mean: ${mean.toFixed(2)}`, 10, height - 30);
+            text(`Std Dev: ${stdDev.toFixed(2)}`, 10, height - 10);
+        }
+    </script>
+</body>
+</html>
