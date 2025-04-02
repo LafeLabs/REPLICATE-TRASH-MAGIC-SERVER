@@ -1,4 +1,5 @@
-# MINIWEB
+# [MINIWEB](https://github.com/LafeLabs/REPLICATE-TRASH-MAGIC-SERVER/tree/main/MINIWEB)
+
 
 THIS IS A MINIMAL SET OF SELF-REPLICATING FILES WHICH PROPAGATE ON THE CLIENT SIDE OF A WEB BROWSER AS LONG AS THEY ARE INSTALLED ON A SERVER WITH OPEN PERMISSIONS!
 
@@ -15,6 +16,7 @@ COPY IT LIVE IN THE BROWSER!
 EDIT THE COPY LIVE IN THE BROWSER!
 
  - [index.html](index.html)
+ - [webeditor.html](webeditor.html)
  - [readme.html](readme.html)
  - [editor.php](editor.php)
  - [edit.html](edit.html)
